@@ -42,5 +42,5 @@ func (b *DefaultSender) Edit(c tele.Context, messageKey string) error {
 		// происходит, когда пытаешься сделать edit на сообщениях с кнопками и файлом/картинкой
 		return c.Send(message, markup)
 	}
-	return c.Send(message, markup)
+	return c.Edit(message, markup)
 }
