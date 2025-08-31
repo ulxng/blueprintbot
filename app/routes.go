@@ -9,7 +9,7 @@ func (a *App) registerRoutes() {
 		return a.sender.Send(c, "root")
 	})
 
-	//добавляем динамические эндпоинты для text
+	//добавляем динамические эндпоинты для reply buttons (приходят как текст)
 	for _, message := range a.loader.All() {
 		for _, answer := range message.Answers {
 			replyButton := answer
