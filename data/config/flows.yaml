@@ -29,9 +29,10 @@ gift:
             message:
                 text: Какой бюджет?
                 answers:
-                    - text: До 1000
-                    - text: 1000–3000
-                    - text: 3000–10000
+                    -
+                        - text: До 1000
+                        - text: 1000–3000
+                        - text: 3000–10000
                     - text: Неважно
             code: budget
             next: ask_style
@@ -40,8 +41,9 @@ gift:
             message:
                 text: Что предпочитает человек?
                 answers:
-                    - text: Практичные вещи
-                    - text: Эмоции
+                    -
+                        - text: Практичные вещи
+                        - text: Эмоции
                     - text: Технологии
                     - text: Трудно угодить
             code: style

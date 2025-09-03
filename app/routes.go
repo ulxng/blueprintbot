@@ -11,11 +11,13 @@ func (a *App) registerRoutes() {
 
 	//добавляем динамические эндпоинты для reply buttons (приходят как текст)
 	for _, message := range a.loader.All() {
-		for _, answer := range message.Answers {
-			replyButton := answer
-			a.bot.Handle(replyButton.Text, func(c tele.Context) error {
-				return a.sender.Route(c, c.Text())
-			})
+		for _, row := range message.Answers {
+			for _, answer := range row {
+				replyButton := answer
+				a.bot.Handle(replyButton.Text, func(c tele.Context) error {
+					return a.sender.Route(c, c.Text())
+				})
+			}
 		}
 	}
 	a.bot.Handle(tele.OnCallback, func(c tele.Context) error {

@@ -42,22 +42,31 @@ func (lt *BaseResolver) Convert(msgLayout messages.Message) (interface{}, *tele.
 
 	markup := &tele.ReplyMarkup{}
 	if msgLayout.Buttons != nil {
-		for _, button := range msgLayout.Buttons {
-			btn := tele.InlineButton{
-				Text: button.Text,
-				Data: button.Code,
-				URL:  button.Link,
+		for _, row := range msgLayout.Buttons {
+			r := make([]tele.InlineButton, len(row))
+			for _, button := range row {
+				btn := tele.InlineButton{
+					Text: button.Text,
+					Data: button.Code,
+					URL:  button.Link,
+				}
+				r = append(r, btn)
 			}
-			markup.InlineKeyboard = append(markup.InlineKeyboard, []tele.InlineButton{btn})
+			markup.InlineKeyboard = append(markup.InlineKeyboard, r)
 		}
 	} else {
 		markup.OneTimeKeyboard = true
-		for _, button := range msgLayout.Answers {
-			btn := tele.ReplyButton{
-				Text:    button.Text,
-				Contact: button.Contact,
+		markup.ResizeKeyboard = true
+		for _, row := range msgLayout.Answers {
+			r := make([]tele.ReplyButton, len(row))
+			for _, button := range row {
+				btn := tele.ReplyButton{
+					Text:    button.Text,
+					Contact: button.Contact,
+				}
+				r = append(r, btn)
 			}
-			markup.ReplyKeyboard = append(markup.ReplyKeyboard, []tele.ReplyButton{btn})
+			markup.ReplyKeyboard = append(markup.ReplyKeyboard, r)
 		}
 	}
 

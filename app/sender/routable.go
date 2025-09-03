@@ -1,8 +1,9 @@
 package sender
 
 import (
-	tele "gopkg.in/telebot.v4"
 	"ulxng/blueprintbot/app/resolver"
+
+	tele "gopkg.in/telebot.v4"
 )
 
 type SimpleRoutableSender struct {

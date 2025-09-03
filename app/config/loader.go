@@ -32,9 +32,11 @@ func NewNavigableLoader(source string) (*NavigableLoader, error) {
 
 func (l *NavigableLoader) buildTextToNextMap() {
 	for _, msg := range l.All() {
-		for _, btn := range msg.Answers {
-			if btn.Link != "" {
-				l.replyButtonsCodes[btn.Text] = btn.Link
+		for _, row := range msg.Answers {
+			for _, btn := range row {
+				if btn.Link != "" {
+					l.replyButtonsCodes[btn.Text] = btn.Link
+				}
 			}
 		}
 	}
