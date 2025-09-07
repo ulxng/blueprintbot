@@ -26,14 +26,14 @@ func (lt *BaseResolver) Get(key string) (interface{}, *tele.ReplyMarkup, error) 
 
 func (lt *BaseResolver) Convert(msgLayout messages.Message) (interface{}, *tele.ReplyMarkup, error) {
 	var response interface{}
+	if msgLayout.Text != "" {
+		response = msgLayout.Text
+	}
 	if msgLayout.Image != "" {
 		response = &tele.Photo{File: tele.FromDisk(msgLayout.Image), Caption: msgLayout.Text}
 	}
 	if msgLayout.File != "" {
 		response = &tele.Document{File: tele.FromDisk(msgLayout.File), Caption: msgLayout.Text}
-	}
-	if msgLayout.Text != "" {
-		response = msgLayout.Text
 	}
 
 	if msgLayout.Buttons != nil && msgLayout.Answers != nil {
