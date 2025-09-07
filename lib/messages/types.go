@@ -30,12 +30,10 @@ type Answer struct {
 type Rows[T any] [][]T
 
 func (r *Rows[T]) UnmarshalYAML(value *yaml.Node) error {
-	// Разрешаем пустое значение
 	if value == nil {
 		*r = nil
 		return nil
 	}
-	// Ждём последовательность (answers: [...])
 	if value.Kind != yaml.SequenceNode {
 		*r = nil
 		return nil
