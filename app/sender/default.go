@@ -37,7 +37,7 @@ func (b *DefaultSender) Edit(c tele.Context, messageKey string) error {
 	if err != nil {
 		return fmt.Errorf("get: %w", err)
 	}
-	if c.Message().Text == "" {
+	if c.Message().Text == "" || markup.ReplyKeyboard != nil {
 		// для предотвращения ошибки telegram: Bad Request: there is no text in the message to edit (400)
 		// происходит, когда пытаешься сделать edit на сообщениях с кнопками и файлом/картинкой
 		return c.Send(message, markup)
