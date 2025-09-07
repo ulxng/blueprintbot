@@ -7,13 +7,18 @@ type Message struct {
 	Buttons Rows[Button] `yaml:"buttons"`
 	Answers Rows[Answer] `yaml:"answers"`
 	Image   string       `yaml:"image"`
-	File    string       `yaml:"file"`
+	File    *File        `yaml:"file"`
 }
 
 type Button struct {
 	Text string `yaml:"text"`
 	Code string `yaml:"code"`
 	Link string `yaml:"link"`
+}
+
+type File struct {
+	Path string `yaml:"path"`
+	Name string `yaml:"name"`
 }
 
 type Answer struct {
